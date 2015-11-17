@@ -1,6 +1,10 @@
+require 'byebug'
+
 class ContactsController < ApplicationController
   def index
-    render json: Contact.all
+    user = User.find_by(id: params[:user_id])
+    # user_contacts = Contact.where(user_id: user.id)
+    render json: user.contacts + user.shared_contacts
   end
 
   def create
